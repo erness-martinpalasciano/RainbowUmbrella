@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Detalle — Nombre de la Marca</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container">
+    <a href="index.html" class="brand">
+      <span class="brand-mark"></span>
+      <span data-brand-name>Nombre de la Marca</span>
+    </a>
+    <div class="header-contact">
+      <a class="btn-whatsapp" data-whatsapp-link data-whatsapp-msg="Hola! Quería hacer una consulta." href="#">
+        <span>Escribir por WhatsApp</span>
+      </a>
+    </div>
+  </div>
+</header>
+
+<div id="ficha-root">
+  <div class="container breadcrumb">
+    <a href="index.html">← Volver al catálogo</a>
+  </div>
+
+  <div class="container ficha">
+    <div class="ficha-gallery">
+      <div class="ficha-gallery-main">
+        <img id="gallery-main-img" src="" alt="">
+      </div>
+      <div class="ficha-gallery-thumbs" id="gallery-thumbs"></div>
+    </div>
+
+    <div class="ficha-layout">
+      <div>
+        <div class="ficha-header">
+          <span class="ficha-tag" id="ficha-tag"></span>
+          <h1 class="ficha-title" id="ficha-title"></h1>
+          <p class="ficha-desc" id="ficha-desc"></p>
+        </div>
+        <div class="ficha-features" id="ficha-features"></div>
+      </div>
+
+      <aside class="contact-card">
+        <div class="contact-card-price" id="contact-price">Consultar</div>
+        <div class="contact-card-price-label">Precio informado por el negocio</div>
+        <a class="btn-whatsapp" id="contact-whatsapp" href="#">
+          <span>Consultar por WhatsApp</span>
+        </a>
+        <div id="contact-details"></div>
+        <div class="social-links" id="social-links"></div>
+      </aside>
+    </div>
+  </div>
+</div>
+
+<footer class="site-footer">
+  <div class="container">
+    <span>© <span data-year></span> <span data-brand-name>Nombre de la Marca</span></span>
+    <a data-whatsapp-link data-whatsapp-msg="Hola! Quería hacer una consulta." href="#">Contactar por WhatsApp</a>
+  </div>
+</footer>
+
+<script src="js/data.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>

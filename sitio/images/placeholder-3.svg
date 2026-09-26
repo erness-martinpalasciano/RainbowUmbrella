@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600">
+  <rect width="800" height="600" fill="#7A9E8E"/>
+  <rect width="800" height="600" fill="#6b8f7e" opacity="0.4"/>
+  <polygon points="400,190 460,320 340,320" fill="#F2E8D8" opacity="0.9"/>
+  <polygon points="440,220 500,320 380,320" fill="#1B4B4F" opacity="0.6"/>
+  <text x="400" y="400" font-family="Georgia, serif" font-size="26" fill="#1E2521" text-anchor="middle" opacity="0.85">Imagen de ejemplo</text>
+  <text x="400" y="432" font-family="Georgia, serif" font-size="16" fill="#1E2521" text-anchor="middle" opacity="0.6">Reemplazar por foto real del catálogo</text>
+</svg>
