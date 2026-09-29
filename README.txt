@@ -2,8 +2,9 @@ CATÁLOGO WEB — TEMPLATE FUNCIONAL
 ==================================
 
 Este sitio es un TEMPLATE con contenido de ejemplo (placeholder).
-Ningún texto, precio, categoría ni imagen es real: hay que
-reemplazarlos por la información real del catálogo.
+Pagina web de rainbow umbrella tours en proceso. 
+Por el momento todo el contenido es ficticio, con el pasar del tiempo se irá avanzando en el proyecto
+
 
 ESTRUCTURA DE ARCHIVOS
 ----------------------
