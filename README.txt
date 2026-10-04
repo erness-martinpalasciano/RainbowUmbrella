@@ -2,13 +2,12 @@ CATÁLOGO WEB — TEMPLATE FUNCIONAL
 ==================================
 
 Este sitio es un TEMPLATE con contenido de ejemplo (placeholder).
-Pagina web de rainbow umbrella tours en proceso. 
-Por el momento todo el contenido es ficticio, con el pasar del tiempo se irá avanzando en el proyecto
-
+Ningún texto, precio, zona ni imagen es real: hay que
+reemplazarlos por la información real del catálogo.
 
 ESTRUCTURA DE ARCHIVOS
 ----------------------
-index.html        -> Página principal (portada + catálogo con filtro por categorías)
+index.html        -> Página principal (portada + catálogo con filtro por zonas)
 ficha.html        -> Ficha individual de cada producto/servicio (se arma sola según el ID en la URL)
 css/style.css     -> Todos los estilos y la paleta de colores/tipografías (identidad visual)
 js/data.js        -> ÚNICO archivo que hay que editar para cargar contenido real
@@ -26,8 +25,8 @@ CÓMO CARGAR EL CONTENIDO REAL (paso a paso)
    - instagram / facebook: enlaces reales si existen
    - ubicacion / horario: si corresponde
 
-3. En CATEGORIES, reemplazá los 3 ejemplos por las categorías reales
-   detectadas en el catálogo (podés agregar o quitar categorías,
+3. En CATEGORIES, agregá las zonas reales
+   detectadas en el catálogo (podés agregar o quitar zonas,
    solo hay que mantener el mismo formato { id, label }).
 
 4. En ITEMS, reemplazá cada objeto de ejemplo por un producto/servicio
@@ -52,6 +51,25 @@ CÓMO PROBAR EL SITIO
 Simplemente abrí index.html con doble clic en cualquier navegador,
 o subí toda la carpeta a un hosting (no requiere servidor especial,
 es HTML/CSS/JS puro).
+
+ESTADO ACTUAL DE CONTENIDO (actualizado)
+------------------------------------------
+- Marca real cargada: Rainbow Umbrella Tours.
+- Descripción real cargada (frase exacta provista).
+- Zona real cargada: Tanti Centro.
+- Primer alojamiento real cargado: Complejo By Muni, con toda la
+  información de texto provista (espacios comunes, unidades, Pet
+  Friendly, restricción de visitas).
+- PENDIENTE: las 14 fotografías reales del Complejo By Muni. Los
+  enlaces de Google Drive compartidos no son accesibles de forma
+  automática (Drive bloquea el acceso sin sesión iniciada), y no
+  se encontraron esas fotos en los videos de referencia enviados.
+  La ficha y la tarjeta del Complejo By Muni muestran por ahora un
+  aviso de "Fotos próximamente" en lugar de imágenes inventadas,
+  genéricas o de stock. En cuanto se adjunten los archivos reales
+  (por ejemplo arrastrándolos directo en el chat), se cargan en
+  /images y se vinculan en data.js (campos imagenPrincipal y
+  galeria del item "complejo-by-muni").
 
 IDENTIDAD VISUAL ACTUAL (PROVISORIA)
 --------------------------------------

@@ -30,14 +30,23 @@ function renderCard(item) {
     ? `<span class="card-price">${item.precio}</span>`
     : `<span class="card-price">Consultar</span>`;
 
+  // Si todavía no hay foto real cargada, se muestra un estado de
+  // "foto pendiente" en vez de una imagen genérica o inventada.
+  const imageHtml = item.imagenPrincipal
+    ? `<img src="${item.imagenPrincipal}" alt="${item.nombre}" loading="lazy">`
+    : `<div class="card-image-pending">Fotos próximamente</div>`;
+
+  const tipoHtml = item.tipo ? `<p class="card-type">${item.tipo}</p>` : "";
+
   return `
     <a class="card" href="ficha.html?id=${encodeURIComponent(item.id)}">
       <div class="card-image">
-        <img src="${item.imagenPrincipal}" alt="${item.nombre}" loading="lazy">
+        ${imageHtml}
         <span class="card-tag">${categoryLabel(item.categoria)}</span>
       </div>
       <div class="card-body">
         <h3 class="card-title">${item.nombre}</h3>
+        ${tipoHtml}
         <p class="card-desc">${item.descripcionBreve}</p>
         <div class="card-footer">
           ${precioHtml}
@@ -75,7 +84,7 @@ function renderCatalog(filter) {
   });
 
   if (!renderedAny) {
-    root.innerHTML = `<p class="empty-state">Todavía no hay elementos cargados en esta categoría.</p>`;
+    root.innerHTML = `<p class="empty-state">Todavía no hay elementos cargados en esta zona.</p>`;
   }
 }
 
@@ -111,11 +120,21 @@ function getQueryParam(name) {
 }
 
 function renderGallery(item) {
+  const galleryWrap = document.getElementById("ficha-gallery");
   const mainImg = document.getElementById("gallery-main-img");
   const thumbsWrap = document.getElementById("gallery-thumbs");
-  if (!mainImg || !thumbsWrap) return;
+  if (!galleryWrap || !mainImg || !thumbsWrap) return;
 
-  const galeria = item.galeria && item.galeria.length ? item.galeria : [item.imagenPrincipal];
+  const galeria = (item.galeria && item.galeria.length)
+    ? item.galeria
+    : (item.imagenPrincipal ? [item.imagenPrincipal] : []);
+
+  // Sin fotos reales todavía: se muestra un aviso honesto en vez de
+  // una imagen genérica, de stock o inventada.
+  if (galeria.length === 0) {
+    galleryWrap.innerHTML = `<div class="gallery-pending">Fotos próximamente — todavía no se cargaron las fotografías reales de este alojamiento.</div>`;
+    return;
+  }
 
   mainImg.src = galeria[0];
   mainImg.alt = item.nombre;
@@ -147,17 +166,53 @@ function initFichaPage() {
 
   document.getElementById("ficha-tag").textContent = categoryLabel(item.categoria);
   document.getElementById("ficha-title").textContent = item.nombre;
-  document.getElementById("ficha-desc").textContent = item.descripcionCompleta;
 
-  const featuresWrap = document.getElementById("ficha-features");
-  if (item.caracteristicas && item.caracteristicas.length) {
-    featuresWrap.innerHTML = `
-      <h3>Características</h3>
-      <ul>${item.caracteristicas.map(f => `<li>${f}</li>`).join("")}</ul>
-    `;
-  } else {
-    featuresWrap.innerHTML = "";
+  const subtitleEl = document.getElementById("ficha-subtitle");
+  subtitleEl.textContent = item.tipo || "";
+  subtitleEl.style.display = item.tipo ? "" : "none";
+
+  document.getElementById("ficha-desc").textContent = item.descripcionCompleta || "";
+
+  // Arma dinámicamente los bloques de información disponibles
+  // (espacios comunes, unidades, características especiales,
+  // o el listado genérico "caracteristicas" si el item lo usa).
+  const sectionsWrap = document.getElementById("ficha-sections");
+  let sectionsHtml = "";
+
+  if (item.espaciosComunes && item.espaciosComunes.length) {
+    sectionsHtml += `
+      <div class="ficha-features">
+        <h3>Espacios comunes</h3>
+        <ul>${item.espaciosComunes.map(f => `<li>${f}</li>`).join("")}</ul>
+      </div>`;
   }
+
+  if (item.unidades && item.unidades.caracteristicas && item.unidades.caracteristicas.length) {
+    const cantidadTxt = item.unidades.cantidad ? ` (${item.unidades.cantidad})` : "";
+    sectionsHtml += `
+      <div class="ficha-features">
+        <h3>Unidades${cantidadTxt}</h3>
+        <ul>${item.unidades.caracteristicas.map(f => `<li>${f}</li>`).join("")}</ul>
+      </div>`;
+  }
+
+  if (item.caracteristicasEspeciales && item.caracteristicasEspeciales.length) {
+    sectionsHtml += `
+      <div class="ficha-features">
+        <h3>Características especiales</h3>
+        <ul>${item.caracteristicasEspeciales.map(f => `<li>${f}</li>`).join("")}</ul>
+      </div>`;
+  }
+
+  if (item.caracteristicas && item.caracteristicas.length) {
+    sectionsHtml += `
+      <div class="ficha-features">
+        <h3>Características</h3>
+        <ul>${item.caracteristicas.map(f => `<li>${f}</li>`).join("")}</ul>
+      </div>`;
+  }
+
+  sectionsWrap.innerHTML = sectionsHtml;
 
   document.getElementById("contact-price").textContent = item.precio || "Consultar";
   document.getElementById("contact-whatsapp").href = buildWhatsappUrl(
