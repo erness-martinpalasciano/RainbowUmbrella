@@ -1,0 +1,6 @@
+Colocá acá las 4 fotos de este alojamiento (formato .webp):
+  cabana-bauge-01.webp  (fachada / vista exterior)
+  cabana-bauge-02.webp  (espacio interior)
+  cabana-bauge-03.webp  (espacio común o característica principal)
+  cabana-bauge-04.webp  (otra fotografía representativa)
+Al guardarlas con estos nombres aparecen solas en el sitio. No hace falta tocar el código.

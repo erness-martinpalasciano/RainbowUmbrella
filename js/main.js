@@ -1,6 +1,7 @@
 /* =====================================================================
    MAIN.JS — Lógica de renderizado. No hace falta editar este archivo
    para actualizar contenido: todo el contenido vive en data.js.
+   Todas las fichas se arman con el mismo componente.
    ===================================================================== */
 
 function buildWhatsappUrl(numero, mensaje) {
@@ -18,6 +19,20 @@ function applySiteInfo() {
   document.querySelectorAll("[data-year]").forEach(el => el.textContent = new Date().getFullYear());
 }
 
+/* Si una foto todavía no existe en la carpeta, se muestra un aviso
+   en lugar de una imagen rota. */
+function imgFallback(img) {
+  const d = document.createElement("div");
+  d.className = "card-image-pending";
+  d.textContent = "Fotos próximamente";
+  img.replaceWith(d);
+}
+
+const EMOJI_RE = /^\p{Extended_Pictographic}/u;
+function renderListItem(texto) {
+  return `<li${EMOJI_RE.test(texto) ? ' class="has-emoji"' : ""}>${texto}</li>`;
+}
+
 /* ---------------- Página principal (index.html) ---------------- */
 
 function categoryLabel(id) {
@@ -30,10 +45,8 @@ function renderCard(item) {
     ? `<span class="card-price">${item.precio}</span>`
     : `<span class="card-price">Consultar</span>`;
 
-  // Si todavía no hay foto real cargada, se muestra un estado de
-  // "foto pendiente" en vez de una imagen genérica o inventada.
   const imageHtml = item.imagenPrincipal
-    ? `<img src="${item.imagenPrincipal}" alt="${item.nombre}" loading="lazy">`
+    ? `<img src="${item.imagenPrincipal}" alt="${item.nombre}" loading="lazy" onerror="imgFallback(this)">`
     : `<div class="card-image-pending">Fotos próximamente</div>`;
 
   const tipoHtml = item.tipo ? `<p class="card-type">${item.tipo}</p>` : "";
@@ -119,6 +132,10 @@ function getQueryParam(name) {
   return new URLSearchParams(window.location.search).get(name);
 }
 
+function showGalleryPending(galleryWrap) {
+  galleryWrap.innerHTML = `<div class="gallery-pending">Fotos próximamente — todavía no se cargaron las fotografías de este alojamiento.</div>`;
+}
+
 function renderGallery(item) {
   const galleryWrap = document.getElementById("ficha-gallery");
   const mainImg = document.getElementById("gallery-main-img");
@@ -129,13 +146,9 @@ function renderGallery(item) {
     ? item.galeria
     : (item.imagenPrincipal ? [item.imagenPrincipal] : []);
 
-  // Sin fotos reales todavía: se muestra un aviso honesto en vez de
-  // una imagen genérica, de stock o inventada.
-  if (galeria.length === 0) {
-    galleryWrap.innerHTML = `<div class="gallery-pending">Fotos próximamente — todavía no se cargaron las fotografías reales de este alojamiento.</div>`;
-    return;
-  }
+  if (galeria.length === 0) { showGalleryPending(galleryWrap); return; }
 
+  mainImg.onerror = () => showGalleryPending(galleryWrap);
   mainImg.src = galeria[0];
   mainImg.alt = item.nombre;
 
@@ -144,8 +157,18 @@ function renderGallery(item) {
   ).join("");
 
   thumbsWrap.querySelectorAll("img").forEach(img => {
+    img.addEventListener("error", () => img.parentElement.remove());
     img.addEventListener("click", () => { mainImg.src = img.src; });
   });
+}
+
+function renderSection(titulo, items) {
+  if (!items || !items.length) return "";
+  return `
+    <div class="ficha-features">
+      <h3>${titulo}</h3>
+      <ul>${items.map(renderListItem).join("")}</ul>
+    </div>`;
 }
 
 function initFichaPage() {
@@ -165,54 +188,24 @@ function initFichaPage() {
   renderGallery(item);
 
   document.getElementById("ficha-tag").textContent = categoryLabel(item.categoria);
+  document.getElementById("ficha-etiquetas").innerHTML =
+    (item.etiquetas || []).map(e => `<span class="ficha-tag ficha-tag--badge">${e}</span>`).join("");
   document.getElementById("ficha-title").textContent = item.nombre;
 
   const subtitleEl = document.getElementById("ficha-subtitle");
   subtitleEl.textContent = item.tipo || "";
   subtitleEl.style.display = item.tipo ? "" : "none";
 
-  document.getElementById("ficha-desc").textContent = item.descripcionCompleta || "";
+  const locEl = document.getElementById("ficha-location");
+  locEl.textContent = item.ubicacion ? `Ubicación: ${item.ubicacion}` : "";
+  locEl.style.display = item.ubicacion ? "" : "none";
 
-  // Arma dinámicamente los bloques de información disponibles
-  // (espacios comunes, unidades, características especiales,
-  // o el listado genérico "caracteristicas" si el item lo usa).
-  const sectionsWrap = document.getElementById("ficha-sections");
-  let sectionsHtml = "";
+  const descEl = document.getElementById("ficha-desc");
+  descEl.textContent = item.descripcionCompleta || "";
+  descEl.style.display = item.descripcionCompleta ? "" : "none";
 
-  if (item.espaciosComunes && item.espaciosComunes.length) {
-    sectionsHtml += `
-      <div class="ficha-features">
-        <h3>Espacios comunes</h3>
-        <ul>${item.espaciosComunes.map(f => `<li>${f}</li>`).join("")}</ul>
-      </div>`;
-  }
-
-  if (item.unidades && item.unidades.caracteristicas && item.unidades.caracteristicas.length) {
-    const cantidadTxt = item.unidades.cantidad ? ` (${item.unidades.cantidad})` : "";
-    sectionsHtml += `
-      <div class="ficha-features">
-        <h3>Unidades${cantidadTxt}</h3>
-        <ul>${item.unidades.caracteristicas.map(f => `<li>${f}</li>`).join("")}</ul>
-      </div>`;
-  }
-
-  if (item.caracteristicasEspeciales && item.caracteristicasEspeciales.length) {
-    sectionsHtml += `
-      <div class="ficha-features">
-        <h3>Características especiales</h3>
-        <ul>${item.caracteristicasEspeciales.map(f => `<li>${f}</li>`).join("")}</ul>
-      </div>`;
-  }
-
-  if (item.caracteristicas && item.caracteristicas.length) {
-    sectionsHtml += `
-      <div class="ficha-features">
-        <h3>Características</h3>
-        <ul>${item.caracteristicas.map(f => `<li>${f}</li>`).join("")}</ul>
-      </div>`;
-  }
-
-  sectionsWrap.innerHTML = sectionsHtml;
+  document.getElementById("ficha-sections").innerHTML =
+    (item.secciones || []).map(s => renderSection(s.titulo, s.items)).join("");
 
   document.getElementById("contact-price").textContent = item.precio || "Consultar";
   document.getElementById("contact-whatsapp").href = buildWhatsappUrl(
@@ -220,17 +213,15 @@ function initFichaPage() {
     `Hola! Quería consultar por "${item.nombre}"`
   );
 
-  const detailsWrap = document.getElementById("contact-details");
   let detailsHtml = "";
   if (SITE_INFO.ubicacion) detailsHtml += `<div class="contact-detail"><strong>Ubicación:</strong> ${SITE_INFO.ubicacion}</div>`;
   if (SITE_INFO.horario) detailsHtml += `<div class="contact-detail"><strong>Horario:</strong> ${SITE_INFO.horario}</div>`;
-  detailsWrap.innerHTML = detailsHtml;
+  document.getElementById("contact-details").innerHTML = detailsHtml;
 
-  const socialWrap = document.getElementById("social-links");
   let socialHtml = "";
   if (SITE_INFO.instagram) socialHtml += `<a href="${SITE_INFO.instagram}" target="_blank" rel="noopener">Instagram</a>`;
   if (SITE_INFO.facebook) socialHtml += `<a href="${SITE_INFO.facebook}" target="_blank" rel="noopener">Facebook</a>`;
-  socialWrap.innerHTML = socialHtml;
+  document.getElementById("social-links").innerHTML = socialHtml;
 }
 
 document.addEventListener("DOMContentLoaded", () => {

@@ -1,0 +1,6 @@
+Colocá acá las 4 fotos de este alojamiento (formato .webp):
+  el-bosquecito-01.webp  (fachada / vista exterior)
+  el-bosquecito-02.webp  (espacio interior)
+  el-bosquecito-03.webp  (espacio común o característica principal)
+  el-bosquecito-04.webp  (otra fotografía representativa)
+Al guardarlas con estos nombres aparecen solas en el sitio. No hace falta tocar el código.

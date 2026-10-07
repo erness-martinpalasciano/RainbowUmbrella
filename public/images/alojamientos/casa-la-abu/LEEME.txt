@@ -1,0 +1,6 @@
+Colocá acá las 4 fotos de este alojamiento (formato .webp):
+  casa-la-abu-01.webp  (fachada / vista exterior)
+  casa-la-abu-02.webp  (espacio interior)
+  casa-la-abu-03.webp  (espacio común o característica principal)
+  casa-la-abu-04.webp  (otra fotografía representativa)
+Al guardarlas con estos nombres aparecen solas en el sitio. No hace falta tocar el código.

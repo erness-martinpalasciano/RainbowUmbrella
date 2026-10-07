@@ -1,0 +1,6 @@
+Colocá acá las 4 fotos de este alojamiento (formato .webp):
+  las-margaritas-01.webp  (fachada / vista exterior)
+  las-margaritas-02.webp  (espacio interior)
+  las-margaritas-03.webp  (espacio común o característica principal)
+  las-margaritas-04.webp  (otra fotografía representativa)
+Al guardarlas con estos nombres aparecen solas en el sitio. No hace falta tocar el código.
