@@ -518,7 +518,7 @@ const ITEMS = [
         "📱 Coworking",
         "🏋🏽‍♀️ Gimnasio"
       ]},
-      { titulo: "Unidades (4)", items: [
+      { titulo: "Unidades (5)", items: [
         "🛏️ Monoambiente",
         "❄️ Aire acondicionado",
         "📺 Smart TV",
