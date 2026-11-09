@@ -1,0 +1,15 @@
+ARSENICA ANTIQUA (subtítulo / eslogan)
+=====================================
+Arsenica Antiqua es una tipografía comercial de Zetafonts (no está en Google Fonts
+y no se puede usar gratis en un sitio web). Para usarla de forma legítima:
+
+1) Comprá la licencia con "Web font" (por ejemplo "Arsenica Antiqua Pack" en
+   Fontspring, o en zetafonts.com / MyFonts).
+2) Convertí/descargá el estilo Regular en formato WOFF2 y guardalo acá como:
+      fonts/ArsenicaAntiqua-Regular.woff2
+   (opcional: ArsenicaAntiqua-Regular.woff)
+3) No hace falta tocar el código: css/style.css ya tiene el @font-face apuntando
+   a ese archivo y aplica la tipografía al eslogan (.hero-subtitle).
+
+Mientras el archivo no exista, el eslogan se muestra con una serif de respaldo
+(Fraunces, de Google Fonts). NO es Arsenica Antiqua.

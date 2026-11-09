@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Detalle — Rainbow Umbrella Tours</title>
+<link rel="icon" type="image/png" href="images/brand/favicon.png">
+<script src="js/theme.js"></script>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container">
+    <a href="index.html" class="brand" aria-label="Rainbow Umbrella Tours — inicio">
+      <span class="brand-mark" role="presentation"></span>
+      <img class="brand-wordmark brand-wordmark--light" src="images/brand/wordmark.png" alt="Rainbow Umbrella Tours" width="936" height="136">
+      <img class="brand-wordmark brand-wordmark--dark" src="images/brand/wordmark-dark.png" alt="" width="936" height="136" aria-hidden="true">
+    </a>
+    <div class="header-contact">
+      <button type="button" class="theme-toggle search-toggle" id="search-toggle" aria-label="Buscar alojamiento" aria-haspopup="dialog" aria-expanded="false" title="Buscar alojamiento">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M15.2 15.2L20.5 20.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      </button>
+      <button type="button" class="theme-toggle" id="theme-toggle" aria-label="Activar modo oscuro" aria-pressed="false" title="Cambiar entre modo claro y oscuro">
+        <svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 14.2A8.5 8.5 0 0 1 9.8 3.5a.6.6 0 0 0-.8-.7A9.5 9.5 0 1 0 21.2 15a.6.6 0 0 0-.7-.8z" fill="currentColor"/></svg>
+        <svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2" fill="currentColor"/><g stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M18.7 5.3l-1.6 1.6M6.9 17.1l-1.6 1.6"/></g></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<div id="ficha-root">
+  <div class="container breadcrumb">
+    <a href="index.html">← Volver al catálogo</a>
+  </div>
+
+  <div class="container ficha">
+    <div class="ficha-gallery" id="ficha-gallery">
+      <div class="ficha-gallery-main">
+        <img id="gallery-main-img" src="" alt="">
+      </div>
+      <div class="ficha-gallery-thumbs" id="gallery-thumbs"></div>
+    </div>
+
+    <div class="ficha-layout">
+      <div>
+        <div class="ficha-header">
+          <div class="ficha-badges">
+            <span class="ficha-tag" id="ficha-tag"></span>
+            <span class="ficha-badges-extra" id="ficha-etiquetas"></span>
+          </div>
+          <h1 class="ficha-title" id="ficha-title"></h1>
+          <p class="ficha-subtitle" id="ficha-subtitle"></p>
+          <p class="ficha-location" id="ficha-location"></p>
+          <p class="ficha-desc" id="ficha-desc"></p>
+        </div>
+        <div id="ficha-sections"></div>
+      </div>
+
+      <aside class="contact-card">
+        <div class="contact-card-price" id="contact-price">Consultar</div>
+        <div class="contact-card-price-label">Precio informado por el negocio</div>
+        <a class="btn-whatsapp" id="contact-whatsapp" href="#">
+          <span>Consultar por WhatsApp</span>
+        </a>
+        <div id="contact-details"></div>
+        <div class="social-links" id="social-links"></div>
+      </aside>
+    </div>
+  </div>
+</div>
+
+<footer class="site-footer">
+  <div class="container">
+    <span>© <span data-year></span> <span data-brand-name>Rainbow Umbrella Tours</span></span>
+    <div class="footer-contact">
+      <span class="footer-contact-title">Contáctanos</span>
+      <ul class="social-icons">
+        <li><a class="social-icon" data-whatsapp-link data-whatsapp-msg="Hola! Quería hacer una consulta." href="#" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp" title="WhatsApp">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.2a8.8 8.8 0 0 0-7.5 13.4L3.2 20.8l4.3-1.1A8.8 8.8 0 1 0 12 3.2z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M9 7.9c-.4.4-.9 1.1-.7 2 .4 2.3 3.2 5.1 5.6 5.5.9.2 1.6-.3 2-.7l.3-.9-1.9-1.1-.8.7c-.9-.4-1.9-1.3-2.4-2.3l.7-.8-1-1.9-.8.1z" fill="currentColor"/></svg>
+        </a></li>
+        <li><a class="social-icon" data-social="instagram" href="#" target="_blank" rel="noopener noreferrer" aria-label="Instagram" title="Instagram">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="3.5" width="17" height="17" rx="5" fill="none" stroke="currentColor" stroke-width="1.9"/><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="1.9"/><circle cx="17.2" cy="6.8" r="1.1" fill="currentColor"/></svg>
+        </a></li>
+        <li><a class="social-icon" data-social="facebook" href="#" target="_blank" rel="noopener noreferrer" aria-label="Facebook" title="Facebook">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13.6 21v-7.6h2.6l.4-3h-3V8.5c0-.9.3-1.5 1.5-1.5h1.6V4.3c-.3 0-1.2-.1-2.3-.1-2.3 0-3.8 1.4-3.8 3.9v2.3H7.9v3h2.7V21h3z" fill="currentColor"/></svg>
+        </a></li>
+      </ul>
+    </div>
+  </div>
+</footer>
+
+<script src="js/data.js"></script>
+<script src="js/main.js"></script>
+<script src="js/search.js"></script>
+</body>
+</html>
