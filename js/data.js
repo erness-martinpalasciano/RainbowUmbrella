@@ -30,8 +30,8 @@ const SITE_INFO = {
   whatsappNumero: "5493541615122",
   instagram: "https://www.instagram.com/rainbowumbrellatours?cplk=dGY2ZXQ4NWR6dndm",
   facebook: "https://www.facebook.com/Rainbowumbrellatours/",
-  ubicacion: null,   // TODO: pendiente de confirmar
-  horario: null      // TODO: pendiente de confirmar
+  ubicacion: "Punilla, Córdoba",   
+  horario: "10:00hs a 20:00hs"      
 };
 
 /* Zonas */
@@ -39,14 +39,17 @@ const CATEGORIES = [
   { id: "tanti", label: "Tanti" },
   { id: "Córdoba", label: "Córdoba" },
   { id: "Alta Gracia", label: "Alta Gracia" },
+  { id: "Estancia Vieja", label: "Estancia Vieja" },
+  { id: "Villa Santa Cruz del Lago", label: "Villa Santa Cruz del Lago" },
   { id: "Buenos Aires", label: "Buenos Aires" }
 ];
 
 /* Tipos de alojamiento que acepta el buscador */
 const TIPOS = {
-  casa: "Casa",
+  casa: "Alojamiento",
   departamento: "Departamento",
   cabana: "Cabaña",
+  duplex: "duplex",
   complejo: "Complejo / Apart hotel"
 };
 
@@ -71,7 +74,7 @@ const SERVICIOS = [
   { id: "futbol",      label: "Cancha de fútbol",      re: /futbol/,                    alias: ["cancha", "futbol"] }
 ];
 
-/* Fotos: public/images/alojamientos/<slug>/<slug>-01.webp ... -0N.webp
+/* Fotos: public/images/alojamientos/<slug>/<slug>-01.jpg ... -0N.jpg
    Si el archivo todavía no existe, el sitio muestra "Fotos próximamente". */
 const IMG_BASE = "public/images/alojamientos";
 function fotosAlojamiento(slug, cantidad) {
@@ -504,28 +507,25 @@ const ITEMS = [
     tipo: "Departamentos",
     ubicacion: "Córdoba Capital",
     etiquetas: [],
-    descripcionBreve: "Apart hotel premium en Tanti Centro, edificio de dos plantas con rampas, piletas con vista a las sierras y 4 unidades equipadas.",
+    descripcionBreve: "Departamento en calle Corrientes, Córdoba Centro.",
     descripcionCompleta: "Este edificio cuenta con dos plantas (rampas).",
     precio: null,
     galeria: fotosAlojamiento("by-muni"),
     datos: { tipo: "complejo", capacidad: null, habitaciones: 2, banos: null, mascotas: true, visitas: false },
     secciones: [
       { titulo: "Espacios comunes", items: [
-        "🏊 2 piletas con vista a las sierras",
-        "🧉 2 quinchos con 🥩 asadores",
-        "🌳 Amplio parque",
-        "🚗 Cochera techada"
+        "🏊 pileta",
+        "📱 Coworking",
+        "🏋🏽‍♀️ Gimnasio"
       ]},
       { titulo: "Unidades (4)", items: [
-        "🛏️ 2 habitaciones",
+        "🛏️ Monoambiente",
         "❄️ Aire acondicionado",
         "📺 Smart TV",
-        "📱 WiFi",
         "🫖 Pava eléctrica",
-        "🧺 Lavarropas",
         "🌮 Microondas"
       ]},
-      { titulo: "Características especiales", items: ["🐶 Pet Friendly"] },
+    
       { titulo: "Restricciones", items: [NO_VISITAS] }
     ]
 
@@ -563,6 +563,7 @@ const ITEMS = [
   },
  /* ---------------------- VILLA SANTA CRUZ DEL LAGO ---------------------- */  {
     id: "el-patiecito-de-pecos",
+    tipo: "Alojamiento",
     categoria: "Villa Santa Cruz del Lago",
     nombre: "El Patiecito de Pecos",
     ubicacion: "Villa Santa Cruz del Lago",
